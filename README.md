@@ -6,50 +6,55 @@
 
 This repository contains the final source version of `mysh`.
 
+## Project Walkthroughs
+
+* **Mid-Project Walkthrough:** [Watch on YouTube](https://youtu.be/Ah7Gdc_fhhQ)
+* **Final Project Walkthrough:** [Watch on YouTube](https://youtu.be/LoICzQzqqX4)
+
 ## Features
 
-- Interactive shell prompt: `mysh$`
-- Built-in shell commands
-- Shell variable assignment and expansion
-- Dynamic heap storage for shell variables
-- File system navigation and listing
-- File reading and word counting
-- Pipes between commands
-- External command execution using `fork` and `exec`
-- Background process execution using `&`
-- Process tracking with `ps`
-- Process termination with `kill`
-- Signal handling for `Ctrl+C`
-- TCP server/client messaging support
-- Non-blocking server with multiple connected clients
-- Cleanup of child processes and dynamically allocated memory
+* Interactive shell prompt: `mysh$`
+* Built-in shell commands
+* Shell variable assignment and expansion
+* Dynamic heap storage for shell variables
+* File system navigation and listing
+* File reading and word counting
+* Pipes between commands
+* External command execution using `fork` and `exec`
+* Background process execution using `&`
+* Process tracking with `ps`
+* Process termination with `kill`
+* Signal handling for `Ctrl+C`
+* TCP server/client messaging support
+* Non-blocking server with multiple connected clients
+* Cleanup of child processes and dynamically allocated memory
 
 ## Technologies Used
 
-- C
-- GCC
-- Makefile
-- POSIX system calls
-- Dynamic memory allocation
-- Unix pipes
-- Signals
-- Process management
-- TCP sockets
-- `select`
-- AddressSanitizer and UndefinedBehaviorSanitizer
+* C
+* GCC
+* Makefile
+* POSIX system calls
+* Dynamic memory allocation
+* Unix pipes
+* Signals
+* Process management
+* TCP sockets
+* `select`
+* AddressSanitizer and UndefinedBehaviorSanitizer
 
 ## How to Run
 
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/mysh.git
+git clone https://github.com/AshirAhmed1/mysh-shell.git
 ```
 
 2. Go into the project directory:
 
 ```bash
-cd mysh
+cd mysh-shell
 ```
 
 3. Compile the shell:
@@ -113,19 +118,19 @@ Contains the main shell loop.
 
 Responsibilities include:
 
-- initializing the variable store
-- initializing signal handling
-- displaying the `mysh$` prompt
-- reading user input
-- enforcing the 128-character input limit
-- handling `Ctrl+D`
-- expanding variables
-- detecting variable assignments
-- spacing pipe/background operators
-- parsing commands into jobs
-- dispatching network commands
-- executing jobs
-- cleaning up processes and memory before exit
+* initializing the variable store
+* initializing signal handling
+* displaying the `mysh$` prompt
+* reading user input
+* enforcing the 128-character input limit
+* handling `Ctrl+D`
+* expanding variables
+* detecting variable assignments
+* spacing pipe/background operators
+* parsing commands into jobs
+* dispatching network commands
+* executing jobs
+* cleaning up processes and memory before exit
 
 ### `builtins.c` and `builtins.h`
 
@@ -151,20 +156,20 @@ Contain most of the shell execution logic.
 
 Responsibilities include:
 
-- implementing `cd`
-- implementing `ls`
-- implementing `cat`
-- implementing `wc`
-- implementing `ps`
-- implementing `kill`
-- parsing jobs and pipelines
-- running foreground and background jobs
-- managing pipes with `pipe` and `dup2`
-- launching commands with `fork` and `execvp`
-- tracking background processes
-- printing background job completion messages
-- handling signals
-- implementing server/client networking commands
+* implementing `cd`
+* implementing `ls`
+* implementing `cat`
+* implementing `wc`
+* implementing `ps`
+* implementing `kill`
+* parsing jobs and pipelines
+* running foreground and background jobs
+* managing pipes with `pipe` and `dup2`
+* launching commands with `fork` and `execvp`
+* tracking background processes
+* printing background job completion messages
+* handling signals
+* implementing server/client networking commands
 
 ### `variables.c` and `variables.h`
 
@@ -182,11 +187,11 @@ typedef struct VarNode {
 
 Supported operations include:
 
-- initializing the store
-- setting variables
-- replacing existing variable values
-- retrieving variable values
-- freeing all stored variables
+* initializing the store
+* setting variables
+* replacing existing variable values
+* retrieving variable values
+* freeing all stored variables
 
 ### `io_helpers.c` and `io_helpers.h`
 
@@ -194,10 +199,10 @@ Contain helper functions for input/output.
 
 Responsibilities include:
 
-- writing messages to standard output
-- writing errors to standard error
-- reading user input
-- tokenizing input by whitespace
+* writing messages to standard output
+* writing errors to standard error
+* reading user input
+* tokenizing input by whitespace
 
 ## Supported Commands
 
@@ -327,7 +332,7 @@ mysh$ cd ..
 mysh$ cd .
 ```
 
-If no path is provided, `cd` changes to the user’s home directory.
+If no path is provided, `cd` changes to the user's home directory.
 
 The shell also supports extended dot-path navigation:
 
@@ -580,15 +585,15 @@ start-client
 
 Networking is implemented using:
 
-- `socket`
-- `bind`
-- `listen`
-- `accept`
-- `connect`
-- `getaddrinfo`
-- `select`
-- `read`
-- `write`
+* `socket`
+* `bind`
+* `listen`
+* `accept`
+* `connect`
+* `getaddrinfo`
+* `select`
+* `read`
+* `write`
 
 ## `start-server`
 
@@ -716,21 +721,21 @@ The shell is designed to continue running after errors instead of crashing.
 
 The project uses dynamic memory allocation for:
 
-- shell variables
-- parsed commands
-- jobs
-- process tracking nodes
-- background job strings
-- network client buffers
-- expanded input tokens
+* shell variables
+* parsed commands
+* jobs
+* process tracking nodes
+* background job strings
+* network client buffers
+* expanded input tokens
 
 Before exiting, the shell cleans up:
 
-- tracked child processes
-- server process
-- background process list
-- background job list
-- shell variable store
+* tracked child processes
+* server process
+* background process list
+* background job list
+* shell variable store
 
 ## Testing
 
@@ -775,28 +780,28 @@ getenv()
 
 Instead, it uses direct systems programming techniques such as:
 
-- `fork`
-- `execvp`
-- `pipe`
-- `dup2`
-- `waitpid`
-- `kill`
-- `sigaction`
-- `socket`
-- `select`
-- manual dynamic memory management
+* `fork`
+* `execvp`
+* `pipe`
+* `dup2`
+* `waitpid`
+* `kill`
+* `sigaction`
+* `socket`
+* `select`
+* manual dynamic memory management
 
 ## Possible Future Improvements
 
-- Add command history
-- Add tab completion
-- Add quote-aware parsing
-- Add input/output redirection with `<`, `>`, and `>>`
-- Add command chaining with `&&` and `||`
-- Add foreground job control
-- Add environment variable export support
-- Add shell script execution
-- Add stronger validation for networking edge cases
+* Add command history
+* Add tab completion
+* Add quote-aware parsing
+* Add input/output redirection with `<`, `>`, and `>>`
+* Add command chaining with `&&` and `||`
+* Add foreground job control
+* Add environment variable export support
+* Add shell script execution
+* Add stronger validation for networking edge cases
 
 ## Author
 
